@@ -1,0 +1,24 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "RESTful Web API with Node.js Framework",
+  "main": "index.js",
+  "keywords": [
+    "blockchain",
+    "udacity-nanodegree-blockchain"
+  ],
+  "author": "Bruno Tomé",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava --verbose test/index.test.js"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.16.3",
+    "level": "^4.0.0"
+  },
+  "devDependencies": {
+    "ava": "0.25.0",
+    "supertest": "^3.2.0"
+  }
+}
