@@ -1,20 +1,26 @@
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 
-// to support JSON-encoded bodies
-app.use(bodyParser.json());
 // to support URL-encoded bodies
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+// to support JSON-encoded bodies
+app.use(bodyParser.json());
 
-//importing route
-let blockRoutes = require('./routes/blockRoute');
-let validationRoutes = require('./routes/validationRoute');
+//register the routes
+let blockController = require('./blockController');
+app.route('/block').post(blockController.createBlock);
 
-//register the route
-blockRoutes(app);
-validationRoutes(app);
+app.route('/block/:blockId').get(blockController.blockDetails);
 
-app.listen(8000, () => console.log('Private Blockchain Notary Service API is listening on port 8000!'));
+app.route('/stars/address::walletAddress').get(blockController.blockDetailsByAddress);
+
+app.route('/stars/hash::blockHash').get(blockController.blockDetailsByBlockHash);
+
+app.route('/requestValidation').post(blockController.requestValidation);
+
+app.route('/message-signature/validate').post(blockController.verifySignature);
+
+app.listen(8000, () => console.log('Blockchain API available on port 8000'));
